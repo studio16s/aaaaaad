@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#100c14">
+<title>How to Pay — jaolove.studio16</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pattaya&family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#100c14;--panel:#19131f;--panel2:#211827;--ink:#f7edf6;
+  --muted:#b9a8bb;--pink:#e9a9cf;--pink2:#b86da7;--line:#6e4c70;
+  --danger:#ffb4c8;--shadow:0 18px 55px #0007;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;min-height:100vh;color:var(--ink);
+  background:
+    radial-gradient(ellipse at 15% 0%,#572b5038,transparent 35%),
+    radial-gradient(ellipse at 90% 25%,#3b255638,transparent 32%),
+    var(--bg);
+  font-family:"Prompt",sans-serif;font-weight:300;
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;
+  opacity:.12;z-index:-1;
+  background-image:radial-gradient(#dca8d5 0.65px,transparent .65px);
+  background-size:19px 19px
+}
+.page{width:min(100% - 30px,620px);margin:0 auto;padding:38px 0 28px}
+header{text-align:center;margin-bottom:25px}
+.eyebrow{font-size:10px;letter-spacing:.42em;color:var(--pink);text-transform:uppercase;margin-bottom:7px}
+h1{
+  font-family:"Pattaya",cursive;font-weight:400;
+  font-size:clamp(43px,10vw,66px);line-height:1.15;
+  margin:0;color:#f4c8e4;text-shadow:0 0 25px #e9a9cf2b
+}
+.shop-name{margin-top:7px;font-size:11px;letter-spacing:.22em;color:var(--muted)}
+.ornament{
+  display:flex;align-items:center;gap:12px;justify-content:center;
+  color:var(--pink);margin:18px 0 0;font-size:13px
+}
+.ornament:before,.ornament:after{
+  content:"";height:1px;width:62px;
+  background:linear-gradient(90deg,transparent,var(--line))
+}
+.ornament:after{transform:rotate(180deg)}
+.section-label{
+  display:flex;align-items:center;gap:10px;margin:23px 0 11px;
+  color:var(--pink);font-size:11px;letter-spacing:.16em;text-transform:uppercase
+}
+.section-label:after{
+  content:"";height:1px;flex:1;
+  background:linear-gradient(90deg,var(--line),transparent)
+}
+.panel{
+  background:linear-gradient(145deg,#211827f2,#17111cf7);
+  border:1px solid #684b69;border-radius:18px;padding:17px;
+  box-shadow:var(--shadow);position:relative;overflow:hidden
+}
+.panel:before{
+  content:"";position:absolute;left:0;top:0;width:100%;height:1px;
+  background:linear-gradient(90deg,transparent,#e9a9cf8a,transparent)
+}
+  .photo-frame{position:relative;width:100%;min-height:0;border-radius:12px;padding:7px}
+.photo-frame:after{
+  content:"";position:absolute;inset:0;border:1px dashed #d99acb;
+  border-radius:12px;pointer-events:none;animation:dash 17s linear infinite
+}
+@keyframes dash{to{border-color:#b76db5;filter:hue-rotate(35deg)}}
+.photo-frame.empty{
+  aspect-ratio:1/1;display:grid;place-items:center;background:#0d0911
+}
+.photo-frame img.main-photo{
+  display:block;width:100%;height:auto;max-height:75vh;
+  object-fit:contain;border-radius:8px;position:relative;z-index:1
+}
+.photo-frame.empty img.main-photo{display:none}
+.placeholder{
+  display:none;position:absolute;inset:0;place-items:center;
+  text-align:center;color:#9f829f;z-index:1
+}
+.empty .placeholder{display:grid}
+.placeholder strong{
+  display:block;font-family:"Pattaya",cursive;
+  font-size:35px;font-weight:400;color:#d6a3cd
+}
+.placeholder span{display:block;font-size:10px;letter-spacing:.18em;margin-top:5px}
+.corner-deco{
+  position:absolute;z-index:3;width:64px;height:64px;
+  object-fit:contain;pointer-events:none;filter:drop-shadow(0 4px 8px #0009)
+}
+.corner-deco.left{left:-2px;bottom:-2px}
+.corner-deco.right{right:-2px;top:-2px}
+.upload-row{
+  display:grid;grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:8px;margin-top:13px
+}
+.file-label{
+  display:flex;justify-content:center;align-items:center;gap:6px;
+  min-height:39px;padding:8px 5px;border:1px solid #5b405d;
+  border-radius:10px;background:#211827;color:#e9c8e1;
+  font-size:10px;text-align:center;cursor:pointer;transition:.2s
+}
+.file-label:hover{border-color:var(--pink);background:#302035}
+input[type=file]{display:none}
+.btn{
+  border:1px solid #a36b9d;background:linear-gradient(135deg,#7e4b7c,#4e3158);
+  color:white;border-radius:11px;padding:11px 14px;
+  font:500 12px "Prompt",sans-serif;cursor:pointer;
+  transition:transform .18s,filter .18s;
+  display:inline-flex;align-items:center;justify-content:center;gap:7px
+}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn:active{transform:scale(.98)}
+.btn.secondary{background:#211827;border-color:#624562;color:#f0d6eb}
+.btn.wide{width:100%;margin-top:12px}
+.hint{color:#a992ad;font-size:10px;line-height:1.7;margin:9px 2px 0}
+.copy-card{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.copy-content{min-width:0}
+.copy-title{font-size:10px;color:#bfa7c1;letter-spacing:.08em;margin-bottom:5px}
+.copy-text{font-size:13px;line-height:1.7;overflow-wrap:anywhere;color:#fff0fa}
+.copy-card .btn{flex-shrink:0}
+.account-head{display:flex;align-items:center;gap:12px;margin-bottom:15px}
+.bank-icon{
+  width:42px;height:42px;border-radius:13px;display:grid;place-items:center;
+  background:#302033;border:1px solid #765176;font-size:19px
+}
+.bank-name{font-size:15px;font-weight:500}
+.bank-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.account-name{
+  border-top:1px solid #4b374f;padding-top:12px;margin-top:12px;
+  font-size:11px;color:#c8b3ca
+}
+.account-name strong{color:#ffe1f4;font-weight:500}
+.number-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  margin-top:9px;padding:12px;background:#100c14;
+  border:1px solid #463148;border-radius:11px
+}
+.number{font-size:17px;letter-spacing:.07em;color:#f9d7ee;font-weight:500;overflow-wrap:anywhere}
+.warning{border-color:#8d536d;background:linear-gradient(145deg,#321b2b,#21131e)}
+.warning-title{color:var(--danger);font-size:13px;font-weight:600;margin-bottom:8px;letter-spacing:.06em}
+.warning p{font-size:11px;line-height:1.9;color:#f0dce9;margin:0}
+.warning p+p{margin-top:10px}
+.warning strong{color:#ffc2d8;font-weight:500}
+footer{text-align:center;padding:26px 10px 10px;color:#c4a7c4;font-size:11px;line-height:2}
+footer .thanks{font-family:"Pattaya",cursive;font-size:25px;color:#efb9dc}
+footer .handle{font-size:11px;letter-spacing:.12em;color:#e4a9d0}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);
+  opacity:0;pointer-events:none;background:#f1c8e4;color:#211321;
+  padding:10px 16px;border-radius:999px;font-size:12px;
+  box-shadow:var(--shadow);transition:.25s;z-index:20;white-space:nowrap
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media(min-width:600px){
+  .page{padding-top:52px}.panel{padding:20px}
+  .corner-deco{width:75px;height:75px}
+}
+@media(max-width:390px){
+  .page{width:calc(100% - 22px)}.panel{padding:12px}
+  .upload-row{gap:5px}.file-label{font-size:9px}
+  .copy-card{align-items:flex-start;flex-direction:column}
+  .copy-card .btn{width:100%}.number{font-size:15px}
+}
+</style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <div class="eyebrow">✦ payment information ✦</div>
+    <h1>How to Pay</h1>
+    <div class="shop-name">jaolove.studio16</div>
+    <div class="ornament">☾ ✧ ♱ ✧ ☽</div>
+  </header>
+
+  <div class="section-label">01 / Payment picture</div>
+  <section class="panel">
+    <div class="photo-frame empty" id="photoFrame">
+      <img class="main-photo" id="mainPhoto" alt="Payment QR or payment picture">
+      <div class="placeholder">
+        <div><strong>picture</strong><span>✧ YOUR PAYMENT IMAGE ✧</span></div>
+      </div>
+      <img class="corner-deco left" id="leftDeco" alt="" hidden>
+      <img class="corner-deco right" id="rightDeco" alt="" hidden>
+    </div>
+    <div class="upload-row">
+      <label class="file-label" for="mainUpload">♡ เลือกรูปหลัก</label>
+      <label class="file-label" for="leftUpload">✧ ตกแต่งซ้ายล่าง</label>
+      <label class="file-label" for="rightUpload">✧ ตกแต่งขวาบน</label>
+      <input id="mainUpload" type="file" accept="image/png,image/jpeg,image/webp,image/gif">
+      <input id="leftUpload" type="file" accept="image/png,image/gif,image/webp">
+      <input id="rightUpload" type="file" accept="image/png,image/gif,image/webp">
+    </div>
+    <button class="btn wide" id="saveQr">↓ บันทึกรูป QR Code</button>
+    <p class="hint">เลือกรูป QR Code หรือรูปชำระเงินด้านบนก่อน แล้วกดบันทึก ระบบจะดาวน์โหลดรูปที่เลือกไว้จริงค่ะ</p>
+  </section>
+    <div class="section-label">02 / Slip caption</div>
+  <section class="panel copy-card">
+    <div class="copy-content">
+      <div class="copy-title">ข้อความกำกับสลิป</div>
+      <div class="copy-text" id="slipCaption">ซื้อ - ขายงานกับ jaoriche爱</div>
+    </div>
+    <button class="btn secondary copy-btn" data-copy="slipCaption">▣ คัดลอกข้อความ</button>
+  </section>
+
+  <div class="section-label">03 / Account details</div>
+  <section class="panel">
+    <div class="account-head">
+      <div class="bank-icon">♛</div>
+      <div>
+        <div class="bank-name">KBank</div>
+        <div class="bank-sub">ธนาคารกสิกรไทย</div>
+      </div>
+    </div>
+    <div class="account-name">ชื่อบัญชี <strong>Wasita P.</strong> เท่านั้น!!</div>
+    <div class="number-row">
+      <div class="number" id="kbankNumber">000-0-00000-0</div>
+      <button class="btn secondary copy-btn" data-copy="kbankNumber">คัดลอก</button>
+    </div>
+  </section>
+
+  <section class="panel" style="margin-top:12px">
+    <div class="account-head">
+      <div class="bank-icon">♡</div>
+      <div>
+        <div class="bank-name">Wallet</div>
+        <div class="bank-sub">ทรูมันนี่วอลเลท</div>
+      </div>
+    </div>
+    <div class="account-name">ชื่อบัญชี <strong>Wasita P.</strong> เท่านั้น!!</div>
+    <div class="number-row">
+      <div class="number" id="walletNumber">000-000-0000</div>
+      <button class="btn secondary copy-btn" data-copy="walletNumber">คัดลอก</button>
+    </div>
+  </section>
+
+  <div class="section-label">04 / Please read</div>
+  <section class="panel warning">
+    <div class="warning-title">⚠ สำคัญ! โปรดอ่านก่อนโอน</div>
+    <p>
+      อย่าลืมตรวจสอบชื่อและเลขบัญชีก่อนโอนทุกครั้ง<br>
+      <strong>(หากโอนผิดทางร้านขอไม่รับผิดชอบทุกกรณีนะคะ)</strong>
+    </p>
+    <p>
+      หากลืมกำกับสลิป ต้องโอนเพิ่ม <strong>0.10฿</strong> นะคะ<br>
+      (ป้องกันการแอบอ้างภายในอนาคตค่ะ)
+    </p>
+  </section>
+
+  <footer>
+    <div class="thanks">thank fot you support ka~</div>
+    <div class="handle">@jaorichestudio16</div>
+    <div style="margin-top:9px;color:#755d7a">✧ made with love &amp; a little darkness ✧</div>
+  </footer>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script>
+const toastEl = document.getElementById('toast');
+let toastTimer;
+
+function toast(message){
+  toastEl.textContent = message;
+  toastEl.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(
+    ()=>toastEl.classList.remove('show'), 2200
+  );
+}
+
+function readImage(inputId, imageId, isMain=false){
+  const input = document.getElementById(inputId);
+
+  input.addEventListener('change',()=>{
+    const file = input.files && input.files[0];
+    if(!file) return;
+
+    if(!file.type.startsWith('image/')){
+      toast('กรุณาเลือกไฟล์รูปภาพ');
+      return;
+    }
+
+    const url = URL.createObjectURL(file);
+    const img = document.getElementById(imageId);
+
+    img.onload = ()=>{
+      if(isMain){
+        document.getElementById('photoFrame')
+          .classList.remove('empty');
+
+        img.dataset.filename = file.name;
+        img.dataset.mime = file.type;
+      }else{
+        img.hidden = false;
+      }
+    };
+
+    img.onerror = ()=>{
+      toast('เปิดรูปภาพนี้ไม่ได้ กรุณาลองไฟล์อื่น');
+    };
+
+    img.src = url;
+  });
+}
+
+readImage('mainUpload','mainPhoto',true);
+readImage('leftUpload','leftDeco');
+readImage('rightUpload','rightDeco');
+
+// ปุ่มคัดลอกข้อความและเลขบัญชี
+document.querySelectorAll('[data-copy]').forEach(button=>{
+  button.addEventListener('click',async()=>{
+    const el = document.getElementById(button.dataset.copy);
+    const value = el.textContent.trim();
+
+    try{
+      await navigator.clipboard.writeText(value);
+      toast('คัดลอกเรียบร้อยแล้ว ♡');
+    }catch(e){
+      const area = document.createElement('textarea');
+      area.value = value;
+      area.style.position = 'fixed';
+      area.style.opacity = '0';
+      document.body.appendChild(area);
+      area.select();
+
+      const ok = document.execCommand('copy');
+      area.remove();
+
+      toast(
+        ok
+          ? 'คัดลอกเรียบร้อยแล้ว ♡'
+          : 'คัดลอกไม่สำเร็จ กรุณาคัดลอกเอง'
+      );
+    }
+  });
+});
+
+// บันทึกรูปภาพที่ผู้ใช้เลือกจริง
+document.getElementById('saveQr').addEventListener('click',()=>{
+  const img = document.getElementById('mainPhoto');
+
+  if(!img.src || !img.complete || !img.naturalWidth){
+    toast('กรุณาเลือกรูป QR Code ก่อนนะคะ');
+    document.getElementById('mainUpload').click();
+    return;
+  }
+
+  const a = document.createElement('a');
+  a.href = img.src;
+
+  const original = (
+    img.dataset.filename || 'payment-qr.png'
+  ).replace(/[^\w.\-\u0E00-\u0E7F]/g,'_');
+
+  a.download = original;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+
+  toast('กำลังบันทึกรูปภาพค่ะ ♡');
+});
+</script>
+</body>
+</html>
